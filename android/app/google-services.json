@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "789397664791",
+    "project_id": "medicalapp-ada21",
+    "storage_bucket": "medicalapp-ada21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789397664791:android:fe6a5c4d42e75938da9852",
+        "android_client_info": {
+          "package_name": "com.example.graduationnn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgh0OIrU8e9laygZMbNX65tGSZfy_7T2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
