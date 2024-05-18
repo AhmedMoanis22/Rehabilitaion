@@ -82,7 +82,6 @@ class _ChatPatientScreenState extends State<ChatPatientScreen> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    const Spacer(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15.0, vertical: 15.0),

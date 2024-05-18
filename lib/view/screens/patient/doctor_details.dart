@@ -26,7 +26,6 @@ class _DoctorDetailsState extends State<DoctorDetails> {
       appBar: AppBar(
         title: const Text('Doctor Details'),
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: BlocBuilder<HomePatientCubit, HomePatientState>(
           builder: (context, state) {

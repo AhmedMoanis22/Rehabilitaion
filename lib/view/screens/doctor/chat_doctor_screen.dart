@@ -5,93 +5,146 @@ import 'package:graduationnn/models/messgae_model.dart';
 import '../../../services/home_doctor/logic/home_doctor_cubit.dart';
 import '../../../services/home_doctor/logic/home_doctor_state.dart';
 
-class ChatDocotorScreen extends StatelessWidget {
-  ChatDocotorScreen({super.key});
+class ChatDocotorScreen extends StatefulWidget {
+  const ChatDocotorScreen({super.key});
 
+  @override
+  State<ChatDocotorScreen> createState() => _ChatDocotorScreenState();
+}
+
+class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
   final TextEditingController messageController = TextEditingController();
 
   @override
+  void initState() {
+    context.read<HomeDoctorCubit>().getDataHome();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeDoctorCubit()
-        ..getDataHome()
-        ..getPatientData(),
-      child: Builder(builder: (BuildContext context) {
-        context.watch<HomeDoctorCubit>().getDoctorMessageToPatient(
-            receiverId: context.watch<HomeDoctorCubit>().patientModel!.uId!);
-        return BlocBuilder<HomeDoctorCubit, HomeDoctorState>(
-          builder: (context, state) {
-            if (state is HomeDoctorPatientDataLoading ||
-                context.read<HomeDoctorCubit>().patientModel == null) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return Scaffold(
-              appBar: AppBar(
-                titleSpacing: 0.0,
-                title: Row(children: [
-                  CircleAvatar(
-                    radius: 20.0,
-                    child: Image.network(
-                      '${context.watch<HomeDoctorCubit>().patientModel!.image}',
+    return Builder(builder: (BuildContext context) {
+      context.watch<HomeDoctorCubit>().getDoctorMessageToPatient(
+          receiverId: context.watch<HomeDoctorCubit>().patientModel!.uId!);
+      return BlocBuilder<HomeDoctorCubit, HomeDoctorState>(
+        builder: (context, state) {
+          if (state is HomeDoctorPatientDataLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Scaffold(
+            appBar: AppBar(
+              titleSpacing: 0.0,
+              title: Row(children: [
+                CircleAvatar(
+                  radius: 20.0,
+                  child: Image.network(
+                    '${context.read<HomeDoctorCubit>().patientModel!.image}',
+                  ),
+                ),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                Text('${context.read<HomeDoctorCubit>().patientModel!.name}'),
+              ]),
+              centerTitle: true,
+            ),
+            body: context.read<HomeDoctorCubit>().messageList.isNotEmpty
+                ? Column(children: [
+                    const SizedBox(
+                      height: 20.0,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                      '${context.watch<HomeDoctorCubit>().patientModel!.name}'),
-                ]),
-                centerTitle: true,
-              ),
-              body: context.read<HomeDoctorCubit>().messageList.isNotEmpty
-                  ? Column(children: [
-                      const SizedBox(
-                        height: 20.0,
+                    Expanded(
+                      child: ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          if (context
+                                  .read<HomeDoctorCubit>()
+                                  .doctorModel!
+                                  .uId ==
+                              context
+                                  .read<HomeDoctorCubit>()
+                                  .messageList[index]
+                                  .senderId) {
+                            return doctorMessage(
+                                context.read<HomeDoctorCubit>().messageList,
+                                index);
+                          }
+
+                          return patientMessage(
+                              context.read<HomeDoctorCubit>().messageList,
+                              index);
+                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 20.0),
+                        itemCount:
+                            context.read<HomeDoctorCubit>().messageList.length,
                       ),
-                      Expanded(
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            if (context
-                                    .read<HomeDoctorCubit>()
-                                    .doctorModel!
-                                    .uId ==
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 15.0),
+                      child: Container(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey.shade300,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Row(children: [
+                          Expanded(
+                            child: TextFormField(
+                                controller: messageController,
+                                decoration: const InputDecoration(
+                                  hintText: 'Type your message',
+                                  border: InputBorder.none,
+                                )),
+                          ),
+                          Container(
+                            width: 60,
+                            height: 50,
+                            color: Colors.blue.shade400,
+                            child: MaterialButton(
+                              onPressed: () {
                                 context
                                     .read<HomeDoctorCubit>()
-                                    .messageList[index]
-                                    .senderId) {
-                              return doctorMessage(
-                                  context.watch<HomeDoctorCubit>().messageList,
-                                  index);
-                            }
-
-                            return patientMessage(
-                                context.watch<HomeDoctorCubit>().messageList,
-                                index);
-                          },
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: 20.0),
-                          itemCount: context
-                              .watch<HomeDoctorCubit>()
-                              .messageList
-                              .length,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 15.0),
-                        child: Container(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey.shade300,
-                              width: 1.0,
+                                    .sendMssageFromDoctorToPatient(
+                                        senderId: context
+                                            .read<HomeDoctorCubit>()
+                                            .doctorModel!
+                                            .uId!,
+                                        receiverId: context
+                                            .read<HomeDoctorCubit>()
+                                            .patientModel!
+                                            .uId!,
+                                        text: messageController.text,
+                                        dateTime: DateTime.now().toString());
+                              },
+                              child: const Icon(
+                                Icons.send,
+                                color: Colors.white,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ])
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                        const Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'No messages yet',
+                          ),
+                        ),
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15.0,
+                            vertical: 15.0,
                           ),
                           child: Row(children: [
                             Expanded(
@@ -121,6 +174,9 @@ class ChatDocotorScreen extends StatelessWidget {
                                               .uId!,
                                           text: messageController.text,
                                           dateTime: DateTime.now().toString());
+                                  void dispose() {
+                                    messageController.clear();
+                                  }
                                 },
                                 child: const Icon(
                                   Icons.send,
@@ -130,70 +186,11 @@ class ChatDocotorScreen extends StatelessWidget {
                             ),
                           ]),
                         ),
-                      ),
-                    ])
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                          const Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'No messages yet',
-                            ),
-                          ),
-                          const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0,
-                              vertical: 15.0,
-                            ),
-                            child: Row(children: [
-                              Expanded(
-                                child: TextFormField(
-                                    controller: messageController,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Type your message',
-                                      border: InputBorder.none,
-                                    )),
-                              ),
-                              Container(
-                                width: 60,
-                                height: 50,
-                                color: Colors.blue.shade400,
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    context
-                                        .read<HomeDoctorCubit>()
-                                        .sendMssageFromDoctorToPatient(
-                                            senderId: context
-                                                .read<HomeDoctorCubit>()
-                                                .doctorModel!
-                                                .uId!,
-                                            receiverId: context
-                                                .read<HomeDoctorCubit>()
-                                                .patientModel!
-                                                .uId!,
-                                            text: messageController.text,
-                                            dateTime:
-                                                DateTime.now().toString());
-                                    void dispose() {
-                                      messageController.clear();
-                                    }
-                                  },
-                                  child: const Icon(
-                                    Icons.send,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ]),
-                          ),
-                        ]),
-            );
-          },
-        );
-      }),
-    );
+                      ]),
+          );
+        },
+      );
+    });
   }
 
   Widget patientMessage(List<MessageModel> message, index) {

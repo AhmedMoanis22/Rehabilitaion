@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'helper/bloc_observation.dart';
 import 'helper/helperfunctions.dart';
+import 'services/home_doctor/logic/home_doctor_cubit.dart';
 import 'services/home_patient/logic/home_patient_cubit.dart';
 
 Future<void> main() async {
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => HomePatientCubit(),
+        ),
+        BlocProvider(
+          create: (context) => HomeDoctorCubit(),
         ),
       ],
       child: const MaterialApp(

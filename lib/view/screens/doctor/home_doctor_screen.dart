@@ -68,7 +68,8 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => PatientsScreen()));
+                                      builder: (context) =>
+                                          const PatientsScreen()));
                             },
                             child: Container(
                               width: 166,
