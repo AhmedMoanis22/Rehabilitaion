@@ -72,46 +72,54 @@ class _HomePatientScreenState extends State<HomePatientScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DoctorsScreen()));
-                              },
-                              child: Container(
-                                width: 166,
-                                height: 160,
-                                decoration: BoxDecoration(
-                                    color: Palette.colorPrimary600,
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Center(
-                                    child: Text(
-                                  'Doctor’s',
-                                  style: txtCon(),
-                                )),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const DoctorsScreen()));
+                                },
+                                child: Container(
+                                  // width: 166,
+                                  height: 160,
+                                  decoration: BoxDecoration(
+                                      color: Palette.colorPrimary600,
+                                      borderRadius: BorderRadius.circular(25)),
+                                  child: Center(
+                                      child: Text(
+                                    'Doctor’s',
+                                    style: txtCon(),
+                                  )),
+                                ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ReceivedExerciseScreen()));
-                              },
-                              child: Container(
-                                width: 166,
-                                height: 160,
-                                decoration: BoxDecoration(
-                                    color: Palette.colorPrimary600,
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Center(
-                                    child: Text(
-                                  'Received Exercise',
-                                  textAlign: TextAlign.center,
-                                  style: txtCon(),
-                                )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ReceivedExerciseScreen()));
+                                },
+                                child: Container(
+                                  // width: 166,
+                                  height: 160,
+                                  decoration: BoxDecoration(
+                                      color: Palette.colorPrimary600,
+                                      borderRadius: BorderRadius.circular(25)),
+                                  child: Center(
+                                      child: Text(
+                                    'Received Exercise',
+                                    textAlign: TextAlign.center,
+                                    style: txtCon(),
+                                  )),
+                                ),
                               ),
                             ),
                           ],
@@ -122,40 +130,46 @@ class _HomePatientScreenState extends State<HomePatientScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MedicalHistoryScreen()));
-                              },
-                              child: Container(
-                                width: 166,
-                                height: 160,
-                                decoration: BoxDecoration(
-                                    color: Palette.colorPrimary600,
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Center(
-                                    child: Text(
-                                  'Medical history',
-                                  style: txtCon(),
-                                )),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MedicalHistoryScreen()));
+                                },
+                                child: Container(
+                                  height: 160,
+                                  decoration: BoxDecoration(
+                                      color: Palette.colorPrimary600,
+                                      borderRadius: BorderRadius.circular(25)),
+                                  child: Center(
+                                      child: Text(
+                                    'Medical history',
+                                    style: txtCon(),
+                                  )),
+                                ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                width: 166,
-                                height: 160,
-                                decoration: BoxDecoration(
-                                    color: Palette.colorPrimary600,
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Center(
-                                  child: Text(
-                                    'Start chat with doctors',
-                                    textAlign: TextAlign.center,
-                                    style: txtCon(),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  width: 166,
+                                  height: 160,
+                                  decoration: BoxDecoration(
+                                      color: Palette.colorPrimary600,
+                                      borderRadius: BorderRadius.circular(25)),
+                                  child: Center(
+                                    child: Text(
+                                      'Start chat with doctors',
+                                      textAlign: TextAlign.center,
+                                      style: txtCon(),
+                                    ),
                                   ),
                                 ),
                               ),
