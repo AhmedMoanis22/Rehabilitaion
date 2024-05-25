@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduationnn/helper/helperfunctions.dart';
 import 'package:graduationnn/models/user_model.dart';
@@ -11,8 +12,25 @@ class HomeDoctorCubit extends Cubit<HomeDoctorState> {
   HomeDoctorCubit() : super(HomeDoctorInitial());
   DoctorModel? doctorModel;
   List<PatientModel> patientList = [];
+    final TextEditingController messageController = TextEditingController();
+       final FocusNode  doctorFocusNode =FocusNode();
+
   PatientModel? patientModel;
   List<MessageModel> messageList = [];
+
+  ScrollController scrollController=ScrollController();
+
+
+
+
+
+
+
+  scrollToDown(){
+
+
+   scrollController.jumpTo(scrollController.position.maxScrollExtent);
+}
 
   void getDataHome() async {
     emit(HomeDoctorLoading());
@@ -71,13 +89,17 @@ class HomeDoctorCubit extends Cubit<HomeDoctorState> {
     required String text,
     required String dateTime,
     required String senderId,
+    required String url
+
   }) {
     MessageModel messageModel = MessageModel(
       text: text,
       datetime: dateTime,
       receiverId: receiverId,
       senderId: senderId,
+      url: url
     );
+
     FirebaseFirestore.instance
         .collection('doctors')
         .doc(doctorModel!.uId)
@@ -92,6 +114,10 @@ class HomeDoctorCubit extends Cubit<HomeDoctorState> {
       emit(SendMessageError(error: error.toString()));
     });
 
+        messageController.text="";
+        doctorFocusNode.unfocus();
+
+
     FirebaseFirestore.instance
         .collection('patients')
         .doc(receiverId)
@@ -105,6 +131,8 @@ class HomeDoctorCubit extends Cubit<HomeDoctorState> {
       print(error.toString());
       emit(SendMessageError(error: error.toString()));
     });
+
+    scrollToDown();
   }
 
   void getDoctorMessageToPatient({required String receiverId}) async {

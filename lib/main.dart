@@ -8,6 +8,7 @@ import 'helper/bloc_observation.dart';
 import 'helper/helperfunctions.dart';
 import 'services/home_doctor/logic/home_doctor_cubit.dart';
 import 'services/home_patient/logic/home_patient_cubit.dart';
+import 'services/home_patient/logic/send_file_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomeDoctorCubit(),
+        ),
+
+        BlocProvider(
+          create: (context) => SendVideoCubit(),
         ),
       ],
       child: const MaterialApp(

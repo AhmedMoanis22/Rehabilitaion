@@ -4,6 +4,7 @@ import 'package:graduationnn/models/messgae_model.dart';
 
 import '../../../services/home_doctor/logic/home_doctor_cubit.dart';
 import '../../../services/home_doctor/logic/home_doctor_state.dart';
+import '../../widgets/video_player.dart';
 
 class ChatDocotorScreen extends StatefulWidget {
   const ChatDocotorScreen({super.key});
@@ -13,7 +14,7 @@ class ChatDocotorScreen extends StatefulWidget {
 }
 
 class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
-  final TextEditingController messageController = TextEditingController();
+
 
   @override
   void initState() {
@@ -55,6 +56,8 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
                     ),
                     Expanded(
                       child: ListView.separated(
+                         controller: context
+                                  .read<HomeDoctorCubit>().scrollController,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           if (context
@@ -95,7 +98,9 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
                         child: Row(children: [
                           Expanded(
                             child: TextFormField(
-                                controller: messageController,
+                                controller:  context
+                                    .read<HomeDoctorCubit>()
+                                    .messageController,
                                 decoration: const InputDecoration(
                                   hintText: 'Type your message',
                                   border: InputBorder.none,
@@ -109,7 +114,7 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
                               onPressed: () {
                                 context
                                     .read<HomeDoctorCubit>()
-                                    .sendMssageFromDoctorToPatient(
+                                    .sendMssageFromDoctorToPatient(url: "",
                                         senderId: context
                                             .read<HomeDoctorCubit>()
                                             .doctorModel!
@@ -118,7 +123,9 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
                                             .read<HomeDoctorCubit>()
                                             .patientModel!
                                             .uId!,
-                                        text: messageController.text,
+                                        text:  context
+                                    .read<HomeDoctorCubit>()
+                                    .messageController.text,
                                         dateTime: DateTime.now().toString());
                               },
                               child: const Icon(
@@ -149,7 +156,12 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
                           child: Row(children: [
                             Expanded(
                               child: TextFormField(
-                                  controller: messageController,
+                                focusNode:  context
+                                      .read<HomeDoctorCubit>()
+                                      .doctorFocusNode,
+                                  controller:  context
+                                    .read<HomeDoctorCubit>()
+                                    .messageController,
                                   decoration: const InputDecoration(
                                     hintText: 'Type your message',
                                     border: InputBorder.none,
@@ -163,7 +175,7 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
                                 onPressed: () {
                                   context
                                       .read<HomeDoctorCubit>()
-                                      .sendMssageFromDoctorToPatient(
+                                      .sendMssageFromDoctorToPatient(url: "",
                                           senderId: context
                                               .read<HomeDoctorCubit>()
                                               .doctorModel!
@@ -172,10 +184,14 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
                                               .read<HomeDoctorCubit>()
                                               .patientModel!
                                               .uId!,
-                                          text: messageController.text,
+                                          text:  context
+                                    .read<HomeDoctorCubit>()
+                                    .messageController.text,
                                           dateTime: DateTime.now().toString());
                                   void dispose() {
-                                    messageController.clear();
+                                     context
+                                    .read<HomeDoctorCubit>()
+                                    .messageController.clear();
                                   }
                                 },
                                 child: const Icon(
@@ -194,6 +210,10 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
   }
 
   Widget patientMessage(List<MessageModel> message, index) {
+   // TODO:implement condition here and then network image 
+    String? msgText=message[index].text;
+    String? url= message[index].url;
+ 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Align(
@@ -212,9 +232,9 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
               horizontal: 8.0,
               vertical: 8.0,
             ),
-            child: Text(
-              '${message[index].text}',
-            ),
+              child:url==""? Text(
+             msgText!,
+            ):VideoPlayerWidget(videoUrl: url!,),
           ),
         ),
       ),
@@ -222,6 +242,10 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
   }
 
   Widget doctorMessage(List<MessageModel> message, index) {
+     // TODO:implement condition here and then network image 
+    String? msgText=message[index].text;
+    String? url= message[index].url;
+  
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Align(
@@ -240,12 +264,13 @@ class _ChatDocotorScreenState extends State<ChatDocotorScreen> {
               horizontal: 8.0,
               vertical: 8.0,
             ),
-            child: Text(
-              '${message[index].text}',
-            ),
+              child:url==""? Text(
+             msgText!,
+            ):VideoPlayerWidget(videoUrl: url!,),
           ),
         ),
       ),
     );
   }
+
 }

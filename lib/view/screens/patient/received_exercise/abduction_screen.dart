@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../config/dimens.dart';
-import '../../../../config/palette.dart';
 import '../../../widgets/custom_button_signup.dart';
 import '../../../widgets/flick_video_screen.dart';
 
@@ -17,7 +15,7 @@ class _AbductionScreenState extends State<AbductionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Abduction Exercise', style: TextStyle(
             color: Colors.black
         ),
@@ -37,7 +35,7 @@ class _AbductionScreenState extends State<AbductionScreen> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  Text("Shoulder abduction exercises specifically "
+                  const Text("Shoulder abduction exercises specifically "
                       "target the deltoid muscles, particularly the "
                       "lateral deltoid, which is responsible for "
                       "lifting the arms away from the body's midline. "
@@ -45,8 +43,8 @@ class _AbductionScreenState extends State<AbductionScreen> {
                       "for improving shoulder stability, mobility, and "
                       "function, as well as enhancing overall upper body "
                       "strength and posture.", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
-                  SizedBox(height: 24,),
-                  Row(
+                  const SizedBox(height: 24,),
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('1 _', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -57,8 +55,8 @@ class _AbductionScreenState extends State<AbductionScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 8,),
-                  Row(
+                  const SizedBox(height: 8,),
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('2 _', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -69,8 +67,8 @@ class _AbductionScreenState extends State<AbductionScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 8,),
-                  Row(
+                  const SizedBox(height: 8,),
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('3 _', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -81,8 +79,8 @@ class _AbductionScreenState extends State<AbductionScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 8,),
-                  Row(
+                  const SizedBox(height: 8,),
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('4 _', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -93,8 +91,8 @@ class _AbductionScreenState extends State<AbductionScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 8,),
-                  Row(
+                  const SizedBox(height: 8,),
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('5 _', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -105,8 +103,8 @@ class _AbductionScreenState extends State<AbductionScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 8,),
-                  Row(
+                  const SizedBox(height: 8,),
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('6 _', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -117,7 +115,7 @@ class _AbductionScreenState extends State<AbductionScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 24,),
+                  const SizedBox(height: 24,),
                   CustomButtonSignUp(txt: 'Continue', onPressed: (){
 
                   }),

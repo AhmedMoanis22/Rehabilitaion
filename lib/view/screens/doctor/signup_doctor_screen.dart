@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduationnn/services/doctors_auth/sign_up/logic/sign_up_cubit.dart';
@@ -22,7 +21,6 @@ class SignUpDoctorScreen extends StatefulWidget {
 class _SignUpDoctorScreenState extends State<SignUpDoctorScreen> {
   bool isLoading = false;
   DatabaseMethods databaseMethods = DatabaseMethods();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();

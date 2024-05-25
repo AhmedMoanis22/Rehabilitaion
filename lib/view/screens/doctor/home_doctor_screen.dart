@@ -72,7 +72,7 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                                           const PatientsScreen()));
                             },
                             child: Container(
-                              width: 166,
+                              width: 150,
                               height: 160,
                               decoration: BoxDecoration(
                                   color: Palette.colorPrimary600,
@@ -93,7 +93,7 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                                           const ViewMedicalHistoryScreen()));
                             },
                             child: Container(
-                              width: 166,
+                              width: 150,
                               height: 160,
                               decoration: BoxDecoration(
                                   color: Palette.colorPrimary600,
@@ -117,7 +117,7 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                           GestureDetector(
                             onTap: () {},
                             child: Container(
-                              width: 166,
+                              width: 150,
                               height: 160,
                               decoration: BoxDecoration(
                                   color: Palette.colorPrimary600,
