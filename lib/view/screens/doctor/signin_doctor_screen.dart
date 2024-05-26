@@ -95,7 +95,7 @@ class _SignInDoctorScreenState extends State<SignInDoctorScreen> {
                                   Checkbox(
                                       value: isChecked,
                                       fillColor:
-                                          WidgetStateProperty.all(Colors.white),
+                                        const MaterialStatePropertyAll(Colors.white)  ,
                                       checkColor: Palette.colorPrimary600,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
