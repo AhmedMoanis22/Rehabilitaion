@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:graduationnn/models/messgae_model.dart';

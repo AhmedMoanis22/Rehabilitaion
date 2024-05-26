@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduationnn/helper/helperfunctions.dart';
 // import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
+
 import 'package:video_player/video_player.dart';
 
 import '../../../models/messgae_model.dart';
@@ -74,6 +76,7 @@ class HomePatientCubit extends Cubit<HomePatientState> {
                   TextButton(
                     onPressed: ()  {
                       BlocProvider.of<SendVideoCubit>(context).sendVideo(
+                        filePath:result.files.single.path! ,
                           file: file,
                           fileName: fileName,
                           ref: ref,
@@ -96,9 +99,7 @@ class HomePatientCubit extends Cubit<HomePatientState> {
                         return state == SendStates.init
                             ? const Text('Send')
                             : (state == SendStates.loading
-                                ? const CircularProgressIndicator(
-                                    color: Colors.white,
-                                  )
+                                ?  LottieBuilder.asset("assets/loading.json")
                                 : (state == SendStates.failure
                                     ? const Icon(Icons.refresh,color: Colors.white,)
                                     : const Text('Send')));

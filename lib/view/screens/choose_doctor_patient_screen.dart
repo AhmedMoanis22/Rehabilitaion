@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduationnn/config/dimens.dart';
 import 'package:graduationnn/config/palette.dart';
-import 'package:graduationnn/view/screens/doctor/signin_doctor_screen.dart';
-import 'package:graduationnn/view/screens/patient/signin_patient_screen.dart';
+
 import 'package:graduationnn/view/widgets/authenticate_doctor.dart';
 import 'package:graduationnn/view/widgets/authenticate_patient.dart';
 import 'package:graduationnn/view/widgets/custom_button_signin.dart';
